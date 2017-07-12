@@ -1,5 +1,5 @@
 
-package coolesPacket;
+package coolesPaket;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -121,7 +121,11 @@ public class DerClient {
 		}
 	}
 
-	private static int[] getGoal(Board b, TreasureType treasure) {
+	private static int[] getGoal(Board b, TreasureType treasure) { /*if(puehdragoran(pt, goal)!=0){
+		 if(pt.getCol()%6==0 || pt.getRow()%6==0){
+		 break;
+	 }
+}*/
 
 		int[] goal = new int[2];
 		for (int i = 0; i < 7; i++) {
@@ -160,7 +164,7 @@ public class DerClient {
 				}
 			}
 		}
-		System.out.println(shiftpos.size());
+	
 		for (Card karte : c.getPossibleRotations()) {
 
 			for (int[] pos : shiftpos) {
@@ -171,10 +175,11 @@ public class DerClient {
 				Board boardAfterMove = b.fakeShift(mmt);
 				
 				for (PositionType pt : boardAfterMove.getAllReachablePositions(boardAfterMove.findPlayer(id))) {
-					 if (puehdragoran(pt, goal)<best){
+					 if (puehdragoran(pt, goal)<=best){
+						
 						 best=puehdragoran(pt, goal);
 						 pt_best=pt;
-						 card_best=c;
+						 card_best=karte;
 						 shift_best=pos;
 						 cardpos_best.setRow(pos[0]);
 						 cardpos_best.setCol(pos[1]);
@@ -218,7 +223,10 @@ public class DerClient {
 			this.card = c;
 			this.shiftpos = shiftpos;
 			this.pinpos = pinpos;
-			System.out.println("hallo"+shiftpos.getRow()+""+shiftpos.getCol());
+			System.out.println("row="+shiftpos.getRow());
+			System.out.println("col="+shiftpos.getCol());
+			System.out.println(c.toString());
+			
 		}
 		
 		public Card getCard(){
